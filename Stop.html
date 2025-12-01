@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section>
+
+        <p id="count">0</p>
+        <div class="buttons">
+
+            <button class="start_btn">Start</button>
+            <button class="reset_btn">Reset</button>
+            <button class="stop_btn">Stop</button>
+            <button class="time_btn">getTime</button>
+            <button class="clear_btn">clearTime</button>
+        </div>
+        <div class="resetValue"></div>
+    </section>
+
+    <script>
+
+
+
+        let start = document.querySelector(".start_btn");
+        let reset = document.querySelector(".reset_btn");
+        let stoped = document.querySelector(".stop_btn");
+        let gettime = document.querySelector(".time_btn");
+        let cleartime = document.querySelector(".clear_btn");
+        let para = document.querySelector("#count");
+        let resetval = document.querySelector('.resetValue');
+        let newpara;
+        let parastore;
+
+
+        let samay;
+        var num = 0;
+        let arr = [];
+        let memo;
+
+        function shuru() {
+            samay = setInterval(counting, 100);
+            function counting() {
+                num++;
+                para.textContent = num;
+
+            }
+
+
+            // para.append(samay);
+            start.disabled = true;
+            console.log(arr);
+
+
+        }
+
+
+
+
+
+        start.addEventListener('click', shuru);
+        stoped.addEventListener('click', function () {
+            clearInterval(samay);
+            start.disabled = false;
+        })
+
+
+       
+
+
+        gettime.addEventListener('click', printkaro);
+
+        function printkaro() {
+            let newpara = document.createElement('p');
+            newpara.textContent = para.textContent;
+            resetval.append(newpara);
+            arr.push(newpara.textContent);
+            meomo = localStorage.setItem('DATAs', JSON.stringify(arr));
+        }
+
+        let saved = localStorage.getItem('DATAs');
+        if (saved != null) {
+            arr = JSON.parse(saved)
+            arr.forEach((items) => {
+                let parastore = document.createElement('p');
+                parastore.textContent = items;
+                resetval.append(parastore);
+
+            })
+        }
+
+        cleartime.addEventListener('click', hatao);
+
+        function hatao() {
+            localStorage.removeItem('DATAs');
+            arr=[];
+            resetval.innerHTML="";
+            // parastore.textContent="";
+            // newpara.textContent="";
+
+            // KYUKI-EK-TOH-GLOBALLY-NOT----AUR----THEY-WILL-CLEAR-ONLY-ONE--ONE-OF--PARA
+
+        }
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
